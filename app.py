@@ -1,6 +1,8 @@
 from config import vuln_app
 import os
 
+app = Flask(__name__)
+
 '''
  Decide if you want to server a vulnerable version or not!
  DO NOTE: some functionalities will still be vulnerable even if the value is set to 0
