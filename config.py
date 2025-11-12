@@ -6,9 +6,14 @@ from connexion.exceptions import ProblemException
 
 vuln_app = connexion.App(__name__, specification_dir='./openapi_specs')
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(vuln_app.app.root_path, 'database/database.db')
+db_dir = os.path.join(vuln_app.app.root_path, 'database')
+os.makedirs(db_dir, exist_ok=True)
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(db_dir, 'database.db')
 vuln_app.app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-vuln_app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+#SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(vuln_app.app.root_path, 'database/database.db')
+#vuln_app.app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+#vuln_app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 vuln_app.app.config['SECRET_KEY'] = 'random'
 # start the db
